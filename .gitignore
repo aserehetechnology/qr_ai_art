@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# Models (Too large for git)
+models/
+*.safetensors
+*.pth
+*.ckpt
+
+# Output
+results/
+temp/
+*.png
+*.jpg
+
+# OS
+.DS_Store

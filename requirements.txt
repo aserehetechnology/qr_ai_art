@@ -1,0 +1,19 @@
+# QR Code Generation
+qrcode[pil]>=7.4.2
+
+# Image Processing
+Pillow>=10.0.0
+
+# Web Framework
+Flask>=3.0.0
+
+# AI/ML Dependencies
+torch>=2.0.0
+diffusers>=0.21.0
+huggingface_hub>=0.19.0
+transformers>=4.35.0
+accelerate>=0.24.0
+safetensors>=0.4.0
+
+# Optional: For faster downloads from HuggingFace
+# hf-transfer>=0.1.0
