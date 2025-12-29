@@ -1539,14 +1539,14 @@ def generate() -> str:
                 blend_opacity = smart_settings.get('blend', 0.0)
                 steps = 40
                 
-                # INJECT LIGHTING & TEXTURE PROMPTS
+                # INJECT LIGHTING & TEXTURE PROMPTS (CONCISE to avoid CLIP truncation)
                 # If it's a "Nature" mode from Smart Analysis, force LUSH visuals
                 if smart_settings['mode'] == "Textured/Nature":
-                     nature_boost = "lush green foliage, dense ferns, mossy texture, biology, detailed leaves, sun rays in forest, organic pattern"
+                     nature_boost = "lush foliage, dense vegetation, organic texture"
                      prompt = f"{prompt}, {nature_boost}"
                 
-                # General Lighting Boost for Scannability
-                lighting_boost = "high contrast, deep shadows, volumetric lighting, sunlit, distinct light and dark areas, chiaroscuro"
+                # General Lighting Boost for Scannability (SHORT KEYWORDS ONLY)
+                lighting_boost = "high contrast, deep shadows, chiaroscuro"
                 prompt = f"{prompt}, {lighting_boost}"
 
                 anti_obvious = [
