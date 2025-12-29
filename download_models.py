@@ -26,19 +26,19 @@ try:
 except Exception as e:
     print(f"❌ Error downloading ControlNet: {e}")
 
-# 2. Download Stable Diffusion v1.5
-# Using standard runwayml repo (Main Branch)
-print("\n[2/2] Downloading Stable Diffusion v1.5...")
+# 2. Download Realistic Vision V5.1 (Photorealistic Model)
+# Much better than standard SD 1.5 for realism
+print("\n[2/2] Downloading Realistic Vision V5.1...")
 try:
     sd_path = snapshot_download(
-        repo_id="runwayml/stable-diffusion-v1-5",
-        local_dir=os.path.join(MODEL_DIR, "stable-diffusion-v1-5"),
+        repo_id="SG161222/Realistic_Vision_V5.1_noVAE",
+        local_dir=os.path.join(MODEL_DIR, "stable-diffusion-v1-5"), # Keep dir name same to avoid code changes
         local_dir_use_symlinks=False,
         ignore_patterns=["*.ckpt", "*.h5", "safety_checker/*"],
         resume_download=True
     )
-    print(f"✅ Stable Diffusion downloaded to: {sd_path}")
+    print(f"✅ Realistic Vision downloaded to: {sd_path}")
 except Exception as e:
-    print(f"❌ Error downloading Stable Diffusion: {e}")
+    print(f"❌ Error downloading Realistic Vision: {e}")
 
 print("\n🎉 All downloads finished! Restart your server to use the models.")

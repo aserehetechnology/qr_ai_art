@@ -76,7 +76,7 @@ class AI_Generator:
                     break
         
         if single_file_path:
-            # Load from single file (Highest Priority)
+            # Load from single file (Highest Priority - Root)
             print(f"Loading from Single File: {single_file_path}")
             self.pipe = StableDiffusionControlNetPipeline.from_single_file(
                 single_file_path,
@@ -86,17 +86,36 @@ class AI_Generator:
                 use_safetensors=True
             )
         else:
-            # Fallback to folder or online
-            print("Single file not found, checking folder/online...")
-            
-            # Check if local folder has actual weights
-            has_local_weights = False
+            # Check if sd_path (subfolder) contains a single safetensors file
+            # This happens when downloading Realistic Vision via snapshot_download
+            sub_single_file = None
             if os.path.exists(sd_path):
-                # Check for bin or safetensors in unet folder
-                unet_path = os.path.join(sd_path, "unet")
-                if os.path.exists(unet_path):
-                    if any(f.endswith((".bin", ".safetensors")) for f in os.listdir(unet_path)):
-                        has_local_weights = True
+                 for f in os.listdir(sd_path):
+                     if f.endswith(".safetensors") and "control" not in f:
+                         sub_single_file = os.path.join(sd_path, f)
+                         break
+            
+            if sub_single_file:
+                 print(f"Loading from Sub-folder Single File: {sub_single_file}")
+                 self.pipe = StableDiffusionControlNetPipeline.from_single_file(
+                    sub_single_file,
+                    controlnet=controlnet,
+                    torch_dtype=dtype_to_use,
+                    safety_checker=None,
+                    use_safetensors=True
+                )
+            else:
+                # Fallback to standard Diffusers folder or online
+                print("Single file not found, checking folder/online...")
+                
+                # Check if local folder has actual Diffusers weights
+                has_local_weights = False
+                if os.path.exists(sd_path):
+                    # Check for bin or safetensors in unet folder
+                    unet_path = os.path.join(sd_path, "unet")
+                    if os.path.exists(unet_path):
+                        if any(f.endswith((".bin", ".safetensors")) for f in os.listdir(unet_path)):
+                            has_local_weights = True
             
             if has_local_weights:
                 model_id_or_path = sd_path

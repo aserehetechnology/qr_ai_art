@@ -85,22 +85,22 @@ def smart_analyze_prompt(prompt_text):
     # kita tetap pilih Mode Halus agar wajahnya tidak rusak.
     
     if is_smooth:
-        # HYBRID MODE: Structure 1.80 + Blend 0.15
+        # HYBRID MODE: Structure 1.70 + Blend 0.15
         # Aman untuk wajah, kendaraan, dan benda licin.
         return {
             "mode": "Smooth/Adaptive",
-            "cn_scale": 1.80,      
+            "cn_scale": 1.70,      
             "blend": 0.15,         
             "contrast": 1.05,
             "sharpness": 1.15
         }
         
     elif is_textured:
-        # SHADOW MODE: Structure 1.95 + Blend 0.00
+        # SHADOW MODE: Structure 1.85 + Blend 0.00
         # Maksimal estetik untuk pemandangan dan tekstur.
         return {
             "mode": "Textured/Shadow",
-            "cn_scale": 1.95,      
+            "cn_scale": 1.85,      
             "blend": 0.00,         
             "contrast": 1.15,
             "sharpness": 1.40
@@ -111,7 +111,7 @@ def smart_analyze_prompt(prompt_text):
         # Fallback jika prompt tidak spesifik
         return {
             "mode": "Balanced/General",
-            "cn_scale": 1.85,
+            "cn_scale": 1.75,
             "blend": 0.10,         
             "contrast": 1.10,
             "sharpness": 1.25
