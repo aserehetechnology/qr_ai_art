@@ -1003,7 +1003,7 @@ _PAGE = """<!doctype html>
                         
                         <label>Performance Mode</label>
                         <select name="performance_mode">
-                            <option value="balanced">🚀 Balanced</option>
+                            <option value="balanced" selected>🚀 Balanced (Recommended)</option>
                             <option value="eco">❄️ Eco Mode</option>
                         </select>
                         
