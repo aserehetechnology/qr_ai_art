@@ -26,19 +26,18 @@ try:
 except Exception as e:
     print(f"❌ Error downloading ControlNet: {e}")
 
-# 2. Download Stable Diffusion v1.5 (FP16 Variant)
-# ~2.5GB (vs 6GB+ for full)
-print("\n[2/2] Downloading Stable Diffusion v1.5 (FP16)...")
+# 2. Download Stable Diffusion v1.5
+# Using standard runwayml repo (Main Branch)
+print("\n[2/2] Downloading Stable Diffusion v1.5...")
 try:
     sd_path = snapshot_download(
         repo_id="runwayml/stable-diffusion-v1-5",
-        revision="fp16", # CRITICAL: Download FP16 branch
         local_dir=os.path.join(MODEL_DIR, "stable-diffusion-v1-5"),
         local_dir_use_symlinks=False,
-        ignore_patterns=["*.bin", "*.ckpt", "*.h5", "safety_checker/*", "text_encoder/pytorch_model.bin"],
+        ignore_patterns=["*.ckpt", "*.h5", "safety_checker/*"],
         resume_download=True
     )
-    print(f"✅ Stable Diffusion (FP16) downloaded to: {sd_path}")
+    print(f"✅ Stable Diffusion downloaded to: {sd_path}")
 except Exception as e:
     print(f"❌ Error downloading Stable Diffusion: {e}")
 
