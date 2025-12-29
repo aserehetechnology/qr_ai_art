@@ -953,17 +953,17 @@ _PAGE = """<!doctype html>
                 <div id="pro-controls" class="collapsible-content" style="display: none; padding-top: 15px;">
                     
                     <!-- STYLE SELECTOR (Moved to Pro) -->
-                    <label>Scan Strategy Strategy</label>
+                    <label>Scan Strategy</label>
                     <div class="style-selector">
-                        <div class="style-card" data-style="hidden" onclick="selectStyle('hidden')">
-                            <input type="radio" name="readability" value="hidden" {% if readability == 'hidden' %}checked{% endif %}>
+                        <div class="style-card active" data-style="hidden" onclick="selectStyle('hidden')">
+                            <input type="radio" name="readability" value="hidden" checked>
                             <span class="icon">✨</span>
                             <div class="title">Smart Auto</div>
                             <div class="desc">AI adapts to prompt</div>
                         </div>
                         
-                        <div class="style-card active" data-style="balanced" onclick="selectStyle('balanced')">
-                            <input type="radio" name="readability" value="balanced" checked>
+                        <div class="style-card" data-style="balanced" onclick="selectStyle('balanced')">
+                            <input type="radio" name="readability" value="balanced" {% if readability == 'balanced' %}checked{% endif %}>
                             <span class="icon">⚖️</span>
                             <div class="title">Balanced</div>
                             <div class="desc">Standard Control</div>
