@@ -96,14 +96,15 @@ def smart_analyze_prompt(prompt_text):
         }
         
     elif is_textured:
-        # SHADOW MODE: Structure 1.85 + Blend 0.00
-        # Maksimal estetik untuk pemandangan dan tekstur.
+        # SHADOW MODE: Structure 1.65 + Blend 0.00
+        # Target: "Perfect Illusion" (Lush Forest Reference)
+        # Reduced from 1.85 to 1.65 to allow leaves to grow naturally over the grid
         return {
-            "mode": "Textured/Shadow",
-            "cn_scale": 1.85,      
+            "mode": "Textured/Nature",
+            "cn_scale": 1.65,      
             "blend": 0.00,         
-            "contrast": 1.15,
-            "sharpness": 1.40
+            "contrast": 1.20,
+            "sharpness": 1.50
         }
         
     else:
@@ -1538,7 +1539,13 @@ def generate() -> str:
                 blend_opacity = smart_settings.get('blend', 0.0)
                 steps = 40
                 
-                # INJECT LIGHTING PROMPTS TO FORCE SCANNABILITY
+                # INJECT LIGHTING & TEXTURE PROMPTS
+                # If it's a "Nature" mode from Smart Analysis, force LUSH visuals
+                if smart_settings['mode'] == "Textured/Nature":
+                     nature_boost = "lush green foliage, dense ferns, mossy texture, biology, detailed leaves, sun rays in forest, organic pattern"
+                     prompt = f"{prompt}, {nature_boost}"
+                
+                # General Lighting Boost for Scannability
                 lighting_boost = "high contrast, deep shadows, volumetric lighting, sunlit, distinct light and dark areas, chiaroscuro"
                 prompt = f"{prompt}, {lighting_boost}"
 
