@@ -1651,7 +1651,8 @@ def generate() -> str:
 
 
 def main() -> int:
-    app.run(host="0.0.0.0", port=8080, debug=True)
+    # Use PORT 5000 (Standard Flask) to avoid 8080 conflicts in Colab
+    app.run(host="0.0.0.0", port=5000, debug=True)
     return 0
 
 
