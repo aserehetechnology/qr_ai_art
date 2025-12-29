@@ -116,22 +116,22 @@ class AI_Generator:
                     if os.path.exists(unet_path):
                         if any(f.endswith((".bin", ".safetensors")) for f in os.listdir(unet_path)):
                             has_local_weights = True
-            
-            if has_local_weights:
-                model_id_or_path = sd_path
-                variant = None 
-            else:
-                model_id_or_path = "runwayml/stable-diffusion-v1-5"
-                variant = "fp16"
+                
+                if has_local_weights:
+                    model_id_or_path = sd_path
+                    variant = None 
+                else:
+                    model_id_or_path = "runwayml/stable-diffusion-v1-5"
+                    variant = "fp16"
 
-            self.pipe = StableDiffusionControlNetPipeline.from_pretrained(
-                model_id_or_path,
-                controlnet=controlnet,
-                torch_dtype=dtype_to_use,
-                safety_checker=None,
-                use_safetensors=True,
-                variant=variant
-            )
+                self.pipe = StableDiffusionControlNetPipeline.from_pretrained(
+                    model_id_or_path,
+                    controlnet=controlnet,
+                    torch_dtype=dtype_to_use,
+                    safety_checker=None,
+                    use_safetensors=True,
+                    variant=variant
+                )
         
         # Use DPM++ 2M Karras scheduler for better quality at low steps
         self.pipe.scheduler = DPMSolverMultistepScheduler.from_config(self.pipe.scheduler.config, use_karras_sigmas=True)
